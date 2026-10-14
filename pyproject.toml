@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantdraft"
+version = "0.1.0"
+description = "Lossless self-speculative decoding with quantized drafts for on-device LLMs (MLX)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Jaya Chandra Dadi" }]
+dependencies = [
+    "mlx>=0.29",
+    "mlx-lm>=0.28",
+    "numpy",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "scipy"]
+# BitBudget drafts are built with the `bitbudget` CLI:
+bitbudget = ["bitbudget @ git+https://github.com/JayaChandraDadi/BitBudget"]
+
+[project.scripts]
+quantdraft = "quantdraft.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["quantdraft*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
